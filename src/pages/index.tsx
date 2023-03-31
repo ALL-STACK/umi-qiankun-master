@@ -1,6 +1,6 @@
-import { Link, Outlet } from "umi";
+import { MicroApp, Outlet } from "umi";
 import React, { useState } from "react";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb, Button } from "antd";
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -12,9 +12,14 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import "antd/dist/reset.css";
-import Slave2 from "@/components/Slave2/index";
-import Slave3 from "@/components/Slave3/index";
+import wangeditor from 'wangeditor';
+import UseMemo from "./useMemo";
+import UseCallback from "./UseCallback/index";
+// import "antd/dist/reset.css";
+
+console.log('====================================');
+console.log(wangeditor);
+console.log('====================================');
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -31,23 +36,29 @@ const items: MenuProps["items"] = [
   key: String(index + 1),
   icon: React.createElement(icon),
   label: `nav ${index + 1}`,
+  children: !index
+    ? [
+        {
+          key: String(index + 1) + "x",
+          // icon: React.createElement(icon),
+          label: `nav ${index + 1}x`,
+        },
+      ]
+    : null,
 }));
+
+const colorBgContainer = "#fff";
 
 export default function Base(props) {
   const [collapsed, setCollapsed] = useState(false);
-  const colorBgContainer = "#fff";
-
-  // console.log('====================================');
-  // console.log(props);
-  // console.log('====================================');
-
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
-        collapsible
+        // collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
+        style={{ backgroundColor: "#3D4852" }}
       >
         <div
           style={{
@@ -61,6 +72,7 @@ export default function Base(props) {
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
+          style={{ backgroundColor: "#3D4852" }}
         />
       </Sider>
       <Layout className="site-layout">
@@ -86,6 +98,7 @@ export default function Base(props) {
               background: colorBgContainer,
             }}
           >
+            {/* <MicroApp name="baidu" /> */}
             <Outlet />
           </div>
         </Content>

@@ -1,20 +1,33 @@
-import React from "react";
-import { MicroApp } from "umi";
-import { Spin } from "antd";
+import React, { useState } from "react";
+import { MicroApp, connect } from "umi";
+import { Spin, ConfigProvider } from "antd";
 
-export default function Slave2() {
+function Slave2(props) {
+  const [masterState, setMasterState] = useState<any>({
+    slogan: "Hello MicroFrontend",
+  });
+
   return (
-    <MicroApp
-      name="slave2"
-      base="/slave2"
-      autoCaptureError
-      // autoSetLoading
-      loader={(loader) => {
-        console.log("====================================");
-        console.log(loader);
-        console.log("====================================");
-        return <Spin spinning={loader} />;
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#00b96b",
+        },
       }}
-    />
+    >
+      <MicroApp
+        name="slave2"
+        // base="/slave2"
+        autoCaptureError
+        autoSetLoading
+        loader={(loader) => <Spin spinning={loader} />}
+        masterState={masterState}
+        setMasterState={setMasterState}
+      />
+    </ConfigProvider>
   );
 }
+
+export default connect(({ global }) => ({
+  global,
+}))(Slave2);
