@@ -17,10 +17,6 @@ import UseMemo from "./useMemo";
 import UseCallback from "./UseCallback/index";
 // import "antd/dist/reset.css";
 
-console.log('====================================');
-console.log(wangeditor);
-console.log('====================================');
-
 const { Header, Content, Footer, Sider } = Layout;
 
 const items: MenuProps["items"] = [

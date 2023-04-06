@@ -9,10 +9,6 @@ const shared = {
     singleton: true,
     eager: true,
   },
-  "wangeditor": {
-    singleton: true,
-    eager: true,
-  }
 };
 
 const moduleFederationName = 'remoteCounter';
@@ -22,7 +18,6 @@ export default defineConfig({
     "@umijs/plugins/dist/qiankun",
     "@umijs/plugins/dist/dva",
     "@umijs/plugins/dist/mf",
-    // "@umijs/plugins/dist/mfsu",
   ],
   routes: [
     {
@@ -45,13 +40,10 @@ export default defineConfig({
     master: {},
   },
   dva: {},
-  mfsu: {
-    strategy: 'eager',
-  },
+  mfsu: false,
   mf: {
     name: moduleFederationName,
     shared,
     library: { type: 'window', name: moduleFederationName },
   },
-  publicPath: 'http://10.20.14.164:8000/',
 });
